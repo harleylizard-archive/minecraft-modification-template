@@ -11,3 +11,16 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:0.14.11")
     modImplementation("net.fabricmc.fabric-api:fabric-api:0.68.1+1.19.3")
 }
+
+loom {
+    runs {
+        getByName("client") {
+            client()
+            ideConfigGenerated(true)
+        }
+        getByName("server") {
+            server()
+            ideConfigGenerated(true)
+        }
+    }
+}

@@ -11,3 +11,17 @@ dependencies {
     modImplementation("org.quiltmc:quilt-loader:0.18.1-beta.26")
     modImplementation("org.quiltmc.quilted-fabric-api:quilted-fabric-api:5.0.0-alpha.8+0.71.0-1.19.3")
 }
+
+loom {
+    runs {
+        getByName("client") {
+            client()
+            ideConfigGenerated(true)
+        }
+
+        getByName("server") {
+            server()
+            ideConfigGenerated(true)
+        }
+    }
+}

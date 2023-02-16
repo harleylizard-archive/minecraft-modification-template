@@ -1,7 +1,6 @@
 plugins {
     id("java")
-    id("jvm-class-extensions") version "1.3"
-    id("jvm-post-processing") version "0.6.1"
+    id("java-processing") version "1.0-SNAPSHOT"
 }
 
 dependencies {
@@ -24,8 +23,7 @@ allprojects {
 
 subprojects {
     apply(plugin = "java")
-    apply(plugin = "jvm-class-extensions")
-    apply(plugin = "jvm-post-processing")
+    apply(plugin = "java-processing")
 
     val common = project(":common")
 
@@ -40,5 +38,9 @@ subprojects {
         dependencies {
             implementation(common)
         }
+    }
+
+    java {
+        withSourcesJar()
     }
 }
