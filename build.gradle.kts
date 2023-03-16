@@ -1,6 +1,5 @@
 plugins {
     id("java")
-    id("java-processing") version "1.0-SNAPSHOT"
 }
 
 dependencies {
@@ -21,22 +20,21 @@ allprojects {
     }
 }
 
+fun SourceSetContainer.copy(sourceSet: SourceSet) {
+    main.configure {
+        java.srcDirs(sourceSet.java.srcDirs())
+        resources.srcDirs(sourceSet.resources.srcDirs())
+    }
+}
+
 subprojects {
     apply(plugin = "java")
-    apply(plugin = "java-processing")
 
-    val common = project(":common")
-
-    if (project != common) {
-        sourceSets.main.configure {
-            val main = common.sourceSets.main.get()
-
-            java.srcDirs(main.java.srcDirs)
-            resources.srcDirs(main.resources.srcDirs)
-        }
+    project(":common").takeIf { project != it }?.let {
+        sourceSets.copy(it.sourceSets.main.get())
 
         dependencies {
-            implementation(common)
+            implementation(it)
         }
     }
 
